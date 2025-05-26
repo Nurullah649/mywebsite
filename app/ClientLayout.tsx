@@ -141,10 +141,13 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
         <ThemeProvider attribute="class" defaultTheme="light">
           <div className="flex min-h-screen flex-col">
             <Header />
-            <main className="flex-1">{children}</main>
+            {/* ===== MOBİL GÖRÜNÜM DÜZELTMESİ ===== */}
+            <main className="flex-1 pt-16">{children}</main>
+            {/* ===== MOBİL GÖRÜNÜM DÜZELTMESİ ===== */}
             <Footer />
           </div>
         </ThemeProvider>
+        <Analytics /> {/* Vercel Analytics eklendi */}
       </body>
     </html>
   )

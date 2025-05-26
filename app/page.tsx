@@ -8,9 +8,9 @@ import { Github, Linkedin, Mail, MapPin, Phone, FileText } from "lucide-react";
 // CV'den ve GitHub'dan alınan bilgilerle güncellenmiş içerik
 const HomePage = () => {
   const skills = [
-    "Python", "C#", "C++", "Java", "JavaScript", "HTML", "CSS", "SQL",
+    "Python", "C#", "C++", "SQL",
     "PyTorch", "TensorFlow", "OpenCV", "Scikit-learn", "Unity",
-    "Android Studio", "LLM", "Git", "Linux"
+    "LLM", "Git", "Linux"
   ];
 
   const projects = [
@@ -18,20 +18,14 @@ const HomePage = () => {
       name: "Ulaşımda Yapay Zeka (Teknofest)",
       description: "Teknofest Ulaşımda Yapay Zeka yarışması projesi. Drone videolarından iniş alanları, araçlar ve insanların tespiti ve bir aracın sadece videolara dayanarak konumunun tahmin edilmesi.",
       tags: ["Yapay Zeka", "Görüntü İşleme", "Nesne Tespiti", "Lokalizasyon"],
-      link: "https://github.com/Nurullah649/Teknofest-Ulasimda-Yapay-Zeka" // Örnek link, güncellenmeli
+      link: "https://github.com/Nurullah649/NPC-AI" // Örnek link, güncellenmeli
     },
     {
-      name: "E-Ticaret Web Sitesi",
-      description: "React, Node.js ve MongoDB kullanılarak geliştirilmiş tam kapsamlı bir e-ticaret platformu.",
-      tags: ["React", "Node.js", "MongoDB", "Full-Stack"],
-      link: "https://github.com/Nurullah649/E-commerce-Website" // Örnek link, güncellenmeli
+      name: "Hava Savunma Sistemleri (Teknofest)",
+      description: "Teknofest Hava Savunma Sistemleri Yarışması. Yapay Zeka destekli nesne tespit, takip ve imha",
+      tags: ["Yapay Zeka", "Görüntü İşleme", "Nesne Tespiti", "Nesne Takibi","Hedef İmha"],
+      link: "https://github.com/Nurullah649/NPC-AI" // Örnek link, güncellenmeli
     },
-    {
-      name: "Mobil Oyun",
-      description: "Unity oyun motoru ile geliştirilmiş, sürükleyici bir mobil macera oyunu.",
-      tags: ["Unity", "Oyun Geliştirme", "C#"],
-      link: "https://github.com/Nurullah649/Mobile-Adventure-Game" // Örnek link, güncellenmeli
-    }
   ];
 
   return (

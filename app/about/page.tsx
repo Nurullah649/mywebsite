@@ -18,13 +18,13 @@ const AboutPage = () => {
     {
       company: "ICED",
       role: "Yapay Zeka Mühendisi",
-      duration: "Kasım 2023 - Devam Ediyor", // CV'deki tarih belirsizliği nedeniyle tahmini
+      duration: "Kasım 2024 - Devam Ediyor", // CV'deki tarih belirsizliği nedeniyle tahmini
       description: "Hukuk alanında bir chatbot yapmak amacıyla LLM eğitimi ve optimizasyonları üstünde çalışmaktayım.",
     },
     {
       company: "Scove System",
       role: "Stajyer Yazılım Mühendisi",
-      duration: "Temmuz 2023 - Ağustos 2023", // CV'deki tarih belirsizliği nedeniyle tahmini
+      duration: "Temmuz 2024 - Ağustos 2024", // CV'deki tarih belirsizliği nedeniyle tahmini
       description: "Pose estimation için analiz sisteminin geliştirilmesi ve hızlandırılması üzerine çalıştım.",
     },
   ];

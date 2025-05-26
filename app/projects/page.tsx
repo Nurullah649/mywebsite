@@ -36,15 +36,7 @@ const projects = [
     image: "https://placehold.co/600x400/8b5cf6/white?text=Pose+Estimation",
     status: "Tamamlandı (Staj Projesi)",
   },
-  {
-    name: "E-Ticaret Platformu (Örnek Proje)",
-    description: "React, Next.js, Node.js ve PostgreSQL gibi modern teknolojiler kullanılarak geliştirilmiş, kullanıcı dostu arayüze sahip bir e-ticaret web sitesi. Ürün listeleme, sepet işlemleri, kullanıcı yönetimi gibi temel e-ticaret fonksiyonlarını içerir.",
-    tags: ["Full-Stack", "React", "Next.js", "Node.js", "PostgreSQL", "TypeScript"],
-    githubLink: "https://github.com/Nurullah649/e-commerce-platform", // Güncelleyin
-    liveLink: "https://example-ecommerce.com", // Varsa canlı demo linki
-    image: "https://placehold.co/600x400/ef4444/white?text=E-Ticaret+Platformu",
-    status: "Geliştiriliyor",
-  },
+
    {
     name: "Kişisel Web Sitesi (Bu Site)",
     description: "Next.js, TypeScript ve Tailwind CSS (Shadcn/UI ile) kullanılarak oluşturulmuş kişisel portfolyo web sitesi. Hakkımda, projelerim ve iletişim bilgilerimi içerir.",

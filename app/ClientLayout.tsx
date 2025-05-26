@@ -8,6 +8,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Github, Linkedin, Mail, Menu, X } from "lucide-react"
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import "./globals.css" // app klasöründeki globals.css'i kullanmalı
 import { useState } from "react"
 

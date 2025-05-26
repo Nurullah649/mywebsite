@@ -7,6 +7,7 @@ import { Inter } from "next/font/google"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Github, Linkedin, Mail, Menu, X } from "lucide-react"
+import { Analytics } from '@vercel/analytics/react';
 import "./globals.css" // app klasöründeki globals.css'i kullanmalı
 import { useState } from "react"
 

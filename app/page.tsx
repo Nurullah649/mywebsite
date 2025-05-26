@@ -24,7 +24,7 @@ const HomePage = () => {
       name: "Hava Savunma Sistemleri (Teknofest)",
       description: "Teknofest Hava Savunma Sistemleri Yarışması. Yapay Zeka destekli nesne tespit, takip ve imha",
       tags: ["Yapay Zeka", "Görüntü İşleme", "Nesne Tespiti", "Nesne Takibi","Hedef İmha"],
-      link: "https://github.com/Nurullah649/NPC-AI" // Örnek link, güncellenmeli
+      link: "https://github.com/Nurullah649/NPC_AI_HavaSavunma" // Örnek link, güncellenmeli
     },
   ];
 

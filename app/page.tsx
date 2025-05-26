@@ -9,7 +9,7 @@ import { Github, Linkedin, Mail, MapPin, Phone, FileText } from "lucide-react";
 const HomePage = () => {
   const skills = [
     "Python", "C#", "C++", "SQL",
-    "PyTorch", "TensorFlow", "OpenCV", "Scikit-learn", "Unity",
+    "PyTorch", "TensorFlow", "OpenCV", "Scikit-learn",
     "LLM", "Git", "Linux"
   ];
 

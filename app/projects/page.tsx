@@ -31,7 +31,6 @@ const projects = [
     name: "Pose Estimation Analiz Sistemi",
     description: "Scove System'deki stajım sırasında, pose estimation (duruş tahmini) için geliştirilen analiz sisteminin geliştirilmesi ve performansının artırılması üzerine çalıştım. Bu sistem, insan vücudu eklem noktalarını tespit ederek hareket analizi yapmaktadır.",
     tags: ["Görüntü İşleme", "Pose Estimation", "Performans Optimizasyonu", "Python"],
-    githubLink: "https://github.com/Nurullah649/Pose-Estimation-System", // Güncelleyin (Gizli olabilir)
     liveLink: null,
     image: "https://placehold.co/600x400/8b5cf6/white?text=Pose+Estimation",
     status: "Tamamlandı (Staj Projesi)",
@@ -41,7 +40,7 @@ const projects = [
     name: "Kişisel Web Sitesi (Bu Site)",
     description: "Next.js, TypeScript ve Tailwind CSS (Shadcn/UI ile) kullanılarak oluşturulmuş kişisel portfolyo web sitesi. Hakkımda, projelerim ve iletişim bilgilerimi içerir.",
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Shadcn/UI", "Portfolyo"],
-    githubLink: "https://github.com/Nurullah649/personal-website", // Güncelleyin
+    githubLink: "https://github.com/Nurullah649/mywebsite", // Güncelleyin
     liveLink: "https://nurullahkurnaz.dev", // Yayınladıktan sonraki adresiniz
     image: "https://placehold.co/600x400/f97316/white?text=Kişisel+Web+Sitesi",
     status: "Tamamlandı",

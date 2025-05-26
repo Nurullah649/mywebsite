@@ -32,7 +32,7 @@ const AboutPage = () => {
   const skills = {
     programming: ["Python", "C#", "C++", "Java", "JavaScript", "HTML", "CSS", "SQL"],
     aiMl: ["PyTorch", "TensorFlow", "OpenCV", "Scikit-learn", "LLM"],
-    tools: ["Unity", "Android Studio", "Git", "Linux"],
+    tools: ["Git", "Linux"],
   };
 
   const achievements = [

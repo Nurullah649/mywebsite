@@ -1,13 +1,13 @@
+// app/ClientLayout.tsx
 "use client"
 
 import type React from "react"
-
 import { ThemeProvider } from "@/components/theme-provider"
 import { Inter } from "next/font/google"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Github, Linkedin, Mail, Menu, X } from "lucide-react"
-import "./globals.css"
+import "./globals.css" // app klasöründeki globals.css'i kullanmalı
 import { useState } from "react"
 
 const inter = Inter({ subsets: ["latin"] })
@@ -16,12 +16,14 @@ function Header() {
   return (
     <header className="sticky top-0 z-40 w-full border-b border-blue-200 bg-white/80 backdrop-blur">
       <div className="container flex h-16 items-center justify-between">
-        <div className="font-bold text-xl text-blue-600">
+        {/* 'AI Portfolio' yazısını 'Nurullah Kurnaz' olarak değiştirelim veya sadece ismini bırakalım */}
+        <div className="font-bold text-xl text-blue-900">
           <Link href="/" className="flex items-center gap-2">
-            <span className="bg-blue-600 text-white px-2 py-1 rounded">AI</span>
-            <span>Portfolio</span>
+            {/* <span className="bg-blue-600 text-white px-2 py-1 rounded">AI</span> */}
+            <span>Nurullah Kurnaz</span>
           </Link>
         </div>
+        {/* Mevcut Navigasyon ve Butonlar */}
         <nav className="hidden md:flex gap-6">
           <Link href="/" className="text-muted-foreground hover:text-blue-600 transition-colors">
             Ana Sayfa
@@ -101,9 +103,10 @@ function Footer() {
         <div className="text-center md:text-left mb-4 md:mb-0">
           <p className="text-sm text-blue-200">© {new Date().getFullYear()} Nurullah Kurnaz. Tüm hakları saklıdır.</p>
         </div>
+        {/* Footer'daki sosyal medya linklerini kendi bilgilerinizle güncelleyin */}
         <div className="flex gap-4">
           <a
-            href="https://github.com/yourusername"
+            href="https://github.com/Nurullah649" // Güncelleyin
             target="_blank"
             className="text-blue-200 hover:text-white transition-colors"
             rel="noreferrer"
@@ -112,7 +115,7 @@ function Footer() {
             <span className="sr-only">GitHub</span>
           </a>
           <a
-            href="https://linkedin.com/in/yourprofile"
+            href="https://linkedin.com/in/nurullah-kurnaz/" // Güncelleyin
             target="_blank"
             className="text-blue-200 hover:text-white transition-colors"
             rel="noreferrer"
@@ -120,7 +123,7 @@ function Footer() {
             <Linkedin className="h-5 w-5" />
             <span className="sr-only">LinkedIn</span>
           </a>
-          <a href="mailto:your.email@example.com" className="text-blue-200 hover:text-white transition-colors">
+          <a href="mailto:nurullahkurnaz47@gmail.com" className="text-blue-200 hover:text-white transition-colors">
             <Mail className="h-5 w-5" />
             <span className="sr-only">Email</span>
           </a>
@@ -132,7 +135,7 @@ function Footer() {
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="tr" suppressHydrationWarning> {/* Dili 'tr' olarak değiştirdim */}
       <body className={`${inter.className} bg-blue-50`}>
         <ThemeProvider attribute="class" defaultTheme="light">
           <div className="flex min-h-screen flex-col">

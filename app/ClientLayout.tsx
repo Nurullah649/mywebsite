@@ -60,7 +60,7 @@ function MobileNav() {
       </Button>
       {open && (
         // Mobil menü, header'ın yüksekliği olan h-16 (top-16) kadar aşağıdan başlıyor.
-        <div className="fixed inset-0 top-16 z-300 bg-white bg-opacity-100 p-4 flex flex-col gap-4"> // bg-white yerine bg-blue-800 deniyoruz
+        <div className="fixed inset-0 top-16 z-50 bg-[#FFFFFF] p-4 flex flex-col gap-4">
           <Link
             href="/"
             className="text-lg font-medium hover:text-blue-600 transition-colors"

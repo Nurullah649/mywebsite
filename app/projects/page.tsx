@@ -38,7 +38,7 @@ const projects = [
       name: "Hava Savunma Sistemleri (Teknofest)",
       description: "Teknofest Hava Savunma Sistemleri Yarışması. Yapay Zeka destekli nesne tespit, takip ve imha",
       tags: ["Yapay Zeka", "Görüntü İşleme", "Nesne Tespiti", "Nesne Takibi","Hedef İmha"],
-      githubLink:: "https://github.com/Nurullah649/NPC_AI_HavaSavunma", // Örnek link, güncellenmeli
+      githubLink: "https://github.com/Nurullah649/NPC_AI_HavaSavunma", // Örnek link, güncellenmeli
       image: "https://placehold.co/600x400/f97316/white?text=Hava+Savunma+Sistemleri",
       status: "Geliştiriliyor",
     },

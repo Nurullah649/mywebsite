@@ -8,7 +8,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Github, Linkedin, Mail, Menu, X } from "lucide-react"
 import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { SpeedInsights } from "@vercel/speed-insights/next" // <-- 1. BU SATIRI EKLE
 import "./globals.css" // app klasöründeki globals.css'i kullanmalı
 import { useState } from "react"
 
@@ -16,16 +16,15 @@ const inter = Inter({ subsets: ["latin"] })
 
 function Header() {
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-blue-200 bg-white/80 backdrop-blur">
-      <div className="container flex h-16 items-center justify-between">
-        {/* 'AI Portfolio' yazısını 'Nurullah Kurnaz' olarak değiştirelim veya sadece ismini bırakalım */}
+    // Header etiketine h-16 ve flex item-center eklendi
+    <header className="sticky top-0 z-40 w-full border-b border-blue-200 bg-white/80 backdrop-blur h-16 flex items-center">
+      {/* İç div'den h-16 kaldırıldı, w-full eklendi */}
+      <div className="container flex items-center justify-between w-full">
         <div className="font-bold text-xl text-blue-900">
           <Link href="/" className="flex items-center gap-2">
-            {/* <span className="bg-blue-600 text-white px-2 py-1 rounded">AI</span> */}
             <span>Nurullah Kurnaz</span>
           </Link>
         </div>
-        {/* Mevcut Navigasyon ve Butonlar */}
         <nav className="hidden md:flex gap-6">
           <Link href="/" className="text-muted-foreground hover:text-blue-600 transition-colors">
             Ana Sayfa
@@ -60,6 +59,7 @@ function MobileNav() {
         {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
       </Button>
       {open && (
+        // Mobil menü, header'ın yüksekliği olan h-16 (top-16) kadar aşağıdan başlıyor.
         <div className="fixed inset-0 top-16 z-50 bg-white p-4 flex flex-col gap-4">
           <Link
             href="/"
@@ -105,10 +105,9 @@ function Footer() {
         <div className="text-center md:text-left mb-4 md:mb-0">
           <p className="text-sm text-blue-200">© {new Date().getFullYear()} Nurullah Kurnaz. Tüm hakları saklıdır.</p>
         </div>
-        {/* Footer'daki sosyal medya linklerini kendi bilgilerinizle güncelleyin */}
         <div className="flex gap-4">
           <a
-            href="https://github.com/Nurullah649" // Güncelleyin
+            href="https://github.com/Nurullah649"
             target="_blank"
             className="text-blue-200 hover:text-white transition-colors"
             rel="noreferrer"
@@ -117,7 +116,7 @@ function Footer() {
             <span className="sr-only">GitHub</span>
           </a>
           <a
-            href="https://linkedin.com/in/nurullah-kurnaz/" // Güncelleyin
+            href="https://linkedin.com/in/nurullah-kurnaz/"
             target="_blank"
             className="text-blue-200 hover:text-white transition-colors"
             rel="noreferrer"
@@ -137,18 +136,18 @@ function Footer() {
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="tr" suppressHydrationWarning> {/* Dili 'tr' olarak değiştirdim */}
+    <html lang="tr" suppressHydrationWarning>
       <body className={`${inter.className} bg-blue-50`}>
         <ThemeProvider attribute="class" defaultTheme="light">
           <div className="flex min-h-screen flex-col">
             <Header />
-            {/* ===== MOBİL GÖRÜNÜM DÜZELTMESİ ===== */}
+            {/* Ana içerik, header'ın yüksekliği (h-16) kadar yukarıdan boşluk bırakıyor (pt-16) */}
             <main className="flex-1 pt-16">{children}</main>
-            {/* ===== MOBİL GÖRÜNÜM DÜZELTMESİ ===== */}
             <Footer />
           </div>
         </ThemeProvider>
-        <Analytics /> {/* Vercel Analytics eklendi */}
+        <Analytics />
+        <SpeedInsights /> {/* <-- 2. BU SATIRI EKLE (</body>'dan hemen önce, Analytics'in altına) */}
       </body>
     </html>
   )

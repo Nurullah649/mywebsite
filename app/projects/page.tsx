@@ -22,7 +22,7 @@ const projects = [
     name: "Hukuk Alanında Chatbot (LLM Projesi)",
     description: "ICED bünyesinde, hukuk alanında kullanılmak üzere geliştirilen bir chatbot projesi. Bu projede, büyük dil modellerinin (LLM) eğitimi ve optimizasyonu üzerine çalışılmaktadır. Amaç, hukuki sorulara doğru ve hızlı yanıtlar verebilen bir yapay zeka asistanı oluşturmaktır.",
     tags: ["Yapay Zeka", "Doğal Dil İşleme", "LLM", "Chatbot", "Python"],
-    liveLink: "https://icedlaw.com/login",
+    liveLink: "https://icedlaw.com/",
     image: "https://icedlaw.com/images/iced%20avukat%20as%20logo%20.png",
     status: "Geliştiriliyor",
   },

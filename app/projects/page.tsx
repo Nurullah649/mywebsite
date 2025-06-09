@@ -1,17 +1,12 @@
-// app/projects/page.tsx
 import { createClient } from "next-sanity";
-import imageUrlBuilder from '@sanity/image-url';
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Github, ExternalLink, Lightbulb } from "lucide-react";
-import { motion } from "framer-motion";
+import { Github } from "lucide-react";
+import { ProjectList } from "@/components/ProjectList"; // Yeni bileşeni import ediyoruz
 
-// --- ESKİ PROJELERİNİZ BURADA GÜVENDE ---
-//
+// --- ESKİ PROJELERİNİZ ---
 const staticProjects = [
-  {
+    {
     name: "Ulaşımda Yapay Zeka (Teknofest Projesi)",
     description: "Teknofest Ulaşımda Yapay Zeka yarışması kapsamında geliştirilen bu proje, drone ile çekilen videolardan iniş alanları, araçlar ve insanların tespit edilmesini ve bir aracın sadece videolara dayanarak konumunun tahmin edilmesini amaçlamaktadır. Görüntü işleme ve derin öğrenme teknikleri kullanılmıştır.",
     tags: ["Yapay Zeka", "Görüntü İşleme", "Nesne Tespiti", "Lokalizasyon", "Derin Öğrenme", "Python", "OpenCV", "PyTorch/TensorFlow"],
@@ -64,13 +59,8 @@ const client = createClient({
   useCdn: false,
 });
 
-const builder = imageUrlBuilder(client);
-function urlFor(source: SanityImageSource) {
-  return builder.image(source);
-}
-
 interface Project {
-  _id?: string; // Sanity'den gelenler için
+  _id?: string;
   name: string;
   description: string;
   image?: SanityImageSource | string;
@@ -89,8 +79,6 @@ async function getSanityProjects(): Promise<Project[]> {
 
 export default async function ProjectsPage() {
   const sanityProjects = await getSanityProjects();
-
-  // Sanity'den gelen projelerle statik projeleri birleştiriyoruz
   const allProjects: Project[] = [...sanityProjects, ...staticProjects];
 
   return (
@@ -102,74 +90,9 @@ export default async function ProjectsPage() {
         </p>
       </header>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {allProjects.map((project, index) => (
-          <motion.div
-            key={project._id || project.name} // Hem sanity hem statik projeler için anahtar
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            whileHover={{ y: -8, scale: 1.03 }}
-            className="flex"
-          >
-            <Card className="flex flex-col w-full overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
-              {project.image && (
-                <div className="aspect-w-16 aspect-h-9 overflow-hidden">
-                  <img
-                    // Hem Sanity resimlerini hem de statik URL'leri destekler
-                    src={typeof project.image === 'string' ? project.image : urlFor(project.image).width(600).height(400).url()}
-                    alt={project.name}
-                    className="object-cover w-full h-full"
-                  />
-                </div>
-              )}
-              <CardHeader>
-                <CardTitle className="text-2xl">{project.name}</CardTitle>
-                {project.status && (
-                  <div className="flex items-center text-sm text-muted-foreground pt-1">
-                    <Lightbulb className="mr-1 h-4 w-4 text-yellow-500" />
-                    <span>{project.status}</span>
-                  </div>
-                )}
-                {project.awards && project.awards.length > 0 && (
-                  <div className="pt-2">
-                      {project.awards.map(award => (
-                          <Badge key={award} variant="destructive" className="mr-1 mb-1">{award}</Badge>
-                      ))}
-                  </div>
-                )}
-              </CardHeader>
-              <CardContent className="flex-grow">
-                <p className="text-muted-foreground mb-4 text-sm leading-relaxed h-24 overflow-y-auto">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {project.tags?.map((tag) => (
-                    <Badge key={tag} variant="secondary">{tag}</Badge>
-                  ))}
-                </div>
-              </CardContent>
-              <CardFooter className="flex justify-between items-center p-4 bg-muted/50 mt-auto">
-                {project.githubLink && (
-                  <Button variant="outline" size="sm" asChild>
-                    <a href={project.githubLink} target="_blank" rel="noopener noreferrer">
-                      <Github className="mr-2 h-4 w-4" /> GitHub
-                    </a>
-                  </Button>
-                )}
-                {project.liveLink && (
-                  <Button variant="default" size="sm" asChild>
-                    <a href={project.liveLink} target="_blank" rel="noopener noreferrer">
-                      <ExternalLink className="mr-2 h-4 w-4" /> Canlı Demo
-                    </a>
-                  </Button>
-                )}
-              </CardFooter>
-            </Card>
-          </motion.div>
-        ))}
-      </div>
-       <div className="text-center mt-12">
+      <ProjectList projects={allProjects} />
+
+      <div className="text-center mt-12">
             <p className="text-lg text-muted-foreground">
                 Daha fazla projem için GitHub profilimi ziyaret edebilirsiniz.
             </p>
@@ -181,6 +104,6 @@ export default async function ProjectsPage() {
         </div>
     </div>
   );
-};
+}
 
 export const revalidate = 10;

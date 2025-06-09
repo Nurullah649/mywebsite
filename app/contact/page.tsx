@@ -107,10 +107,6 @@ export default function ContactPage() {
                     <Mail className="mr-3 h-6 w-6 text-primary group-hover:text-primary/80 transition-colors" />
                     <span className="text-muted-foreground group-hover:text-foreground transition-colors">nurullahkurnaz47@gmail.com</span>
                   </a>
-                  <a href="tel:5550265947" className="flex items-center group">
-                    <Phone className="mr-3 h-6 w-6 text-primary group-hover:text-primary/80 transition-colors" />
-                    <span className="text-muted-foreground group-hover:text-foreground transition-colors">+90 555 026 5947</span>
-                  </a>
                   <div className="flex items-center">
                     <MapPin className="mr-3 h-6 w-6 text-primary" />
                     <span className="text-muted-foreground">Selçuklu/Konya, Türkiye</span>

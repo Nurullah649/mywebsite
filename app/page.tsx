@@ -55,7 +55,7 @@ const HomePage = () => {
               Merhaba, ben Nurullah Kurnaz
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground">
-              Yapay zeka ve web teknolojileriyle yenilikçi çözümler üreten bir bilgisayar mühendisliği öğrencisiyim.
+              Yapay zeka ve robotik teknolojileriyle yenilikçi çözümler üreten bir bilgisayar mühendisliği öğrencisiyim.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center md:justify-start">
               <Button size="lg" asChild className="bg-teal-600 hover:bg-teal-700 dark:bg-teal-500 dark:hover:bg-teal-600">

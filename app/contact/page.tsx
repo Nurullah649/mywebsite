@@ -82,7 +82,6 @@ export default function ContactPage() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <a href="mailto:nurullahkurnaz47@gmail.com" className="flex items-center group gap-3"><Mail className="text-primary" /><span>nurullahkurnaz47@gmail.com</span></a>
-                <a href="tel:5550265947" className="flex items-center group gap-3"><Phone className="text-primary" /><span>+90 555 026 5947</span></a>
                 <div className="flex items-center gap-3"><MapPin className="text-primary" /><span>Selçuklu/Konya, Türkiye</span></div>
                 <div className="flex space-x-3 pt-4">
                   <Button variant="outline" size="icon" asChild><a href="https://github.com/Nurullah649" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><Github /></a></Button>

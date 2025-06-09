@@ -45,7 +45,7 @@ const staticProjects = [
     description: "Next.js, TypeScript ve Tailwind CSS (Shadcn/UI ile) kullanılarak oluşturulmuş kişisel portfolyo web sitesi. Hakkımda, projelerim ve iletişim bilgilerimi içerir.",
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Shadcn/UI", "Portfolyo"],
     githubLink: "https://github.com/Nurullah649/mywebsite",
-    liveLink: "https://nurullahkurnaz.dev",
+    liveLink: "https://nurullahkurnaz.com",
     image: "https://placehold.co/600x400/f97316/white?text=Kişisel+Web+Sitesi",
     status: "Tamamlandı",
   },

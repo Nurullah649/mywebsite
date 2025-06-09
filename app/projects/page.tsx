@@ -72,9 +72,14 @@ interface Project {
 }
 
 async function getSanityProjects(): Promise<Project[]> {
-  const query = `*[_type == "project"] | order(_createdAt desc)`;
-  const projects = await client.fetch<Project[]>(query);
-  return projects;
+  try {
+    const query = `*[_type == "project"] | order(_createdAt desc)`;
+    const projects = await client.fetch<Project[]>(query);
+    return projects;
+  } catch (error) {
+    console.error("Failed to fetch Sanity projects:", error);
+    return []; // Hata durumunda boş bir dizi döndür
+  }
 }
 
 export default async function ProjectsPage() {

@@ -10,6 +10,8 @@ import { Github, ExternalLink, Lightbulb } from "lucide-react";
 import { createClient } from "next-sanity";
 
 // Resim URL'leri için yardımcı fonksiyonlar
+// Bu client kurulumu sadece resim URL'leri için kullanılır,
+// veri çekme işlemi sunucu tarafında yapılır.
 const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,

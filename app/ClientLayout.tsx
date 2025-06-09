@@ -157,11 +157,11 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
             <AnimatePresence mode="wait">
               <motion.main
                 key={pathname}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-                className="flex-1" // pt-16 kaldırıldı, header'ın yüksekliği kadar boşluk bırakılmayacak.
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2, ease: "easeInOut" }}
+                className="flex-1"
               >
                 {children}
               </motion.main>

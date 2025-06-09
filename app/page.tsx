@@ -1,23 +1,33 @@
 // app/page.tsx
-"use client"; // motion component'leri için client component olmalı
+"use client"; // Animasyonlar için bu gerekli
 
 import { motion } from "framer-motion";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail } from "lucide-react";
 
-// Animasyon variantları
-const sectionVariants = {
-  hidden: { opacity: 0, y: 50 },
+// Tekrarlanan animasyonlar için merkezi variant'lar
+const containerStagger = {
+  hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    y: 0,
     transition: {
-      duration: 0.6,
-      ease: "easeOut"
-    }
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemFadeInUp = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
   },
 };
 
@@ -41,24 +51,24 @@ const HomePage = () => {
       tags: ["Yapay Zeka", "Görüntü İşleme", "Nesne Tespiti", "Nesne Takibi","Hedef İmha"],
       link: "https://github.com/Nurullah649/NPC_AI_HavaSavunma"
     },
-    {
-      name: "Kişisel Web Sitesi (Bu Site)",
-      description: "Next.js, TypeScript ve Tailwind CSS (Shadcn/UI ile) kullanılarak oluşturulmuş kişisel portfolyo web sitesi. Hakkımda, projelerim ve iletişim bilgilerimi içerir.",
-      tags: ["Next.js", "TypeScript", "Tailwind CSS", "Shadcn/UI"],
-      link: "https://github.com/Nurullah649/mywebsite"
-    },
+     {
+    name: "Kişisel Web Sitesi (Bu Site)",
+    description: "Next.js, TypeScript ve Tailwind CSS (Shadcn/UI ile) kullanılarak oluşturulmuş kişisel portfolyo web sitesi. Hakkımda, projelerim ve iletişim bilgilerimi içerir.",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Shadcn/UI"],
+    link: "https://github.com/Nurullah649/mywebsite"
+  },
   ];
 
   return (
     <div className="container mx-auto p-4 md:p-8 space-y-12">
       {/* Hero Section */}
-      <section className="flex flex-col md:flex-row items-center justify-between space-y-8 md:space-y-0 md:space-x-12 py-20 min-h-[calc(100vh-4rem)] hero-bg">
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-          className="md:w-2/3 space-y-4 text-center md:text-left"
-        >
+      <motion.section
+        variants={containerStagger}
+        initial="hidden"
+        animate="visible"
+        className="flex flex-col md:flex-row items-center justify-between space-y-8 md:space-y-0 md:space-x-12 py-20 min-h-[calc(100vh-4rem)] hero-bg"
+      >
+        <motion.div variants={itemFadeInUp} className="md:w-2/3 space-y-4 text-center md:text-left">
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight animated-gradient-text">
             Merhaba, ben Nurullah Kurnaz
           </h1>
@@ -74,25 +84,20 @@ const HomePage = () => {
             </Button>
           </div>
         </motion.div>
-        <motion.div
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="md:w-1/3 flex justify-center"
-        >
+        <motion.div variants={itemFadeInUp} className="md:w-1/3 flex justify-center">
           <Avatar className="w-48 h-48 md:w-64 md:h-64 border-4 border-primary animate-float">
             <AvatarImage src="https://github.com/Nurullah649.png" alt="Nurullah Kurnaz" />
             <AvatarFallback>NK</AvatarFallback>
           </Avatar>
         </motion.div>
-      </section>
+      </motion.section>
 
       {/* Sections with scroll animations */}
       <motion.section
-        variants={sectionVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true, amount: 0.2 }}
         className="py-12 bg-secondary rounded-lg p-8"
       >
         <h2 className="text-3xl font-semibold mb-6 text-center">Kısaca Hakkımda</h2>
@@ -107,45 +112,47 @@ const HomePage = () => {
       </motion.section>
 
       <motion.section
-        variants={sectionVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true, amount: 0.2 }}
         className="py-12"
       >
         <h2 className="text-3xl font-semibold mb-8 text-center">Yeteneklerim</h2>
-        <div className="flex flex-wrap justify-center gap-3">
-          {skills.map((skill, i) => (
-            <motion.div
-              key={skill}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.05 }}
-            >
+        <motion.div
+          variants={containerStagger}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="flex flex-wrap justify-center gap-3"
+        >
+          {skills.map((skill) => (
+            <motion.div key={skill} variants={itemFadeInUp}>
               <Badge variant="default" className="text-sm px-4 py-2 rounded-full cursor-pointer hover:scale-110 transition-transform">
                 {skill}
               </Badge>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </motion.section>
 
       <motion.section
-        variants={sectionVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true, amount: 0.2 }}
         className="py-12"
       >
         <h2 className="text-3xl font-semibold mb-8 text-center">Öne Çıkan Projelerim</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.slice(0, 3).map((project, i) => (
-            <motion.div
-              key={project.name}
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
-            >
+        <motion.div
+          variants={containerStagger}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          {projects.slice(0, 3).map((project) => (
+            <motion.div key={project.name} variants={itemFadeInUp}>
               <Card className="flex flex-col h-full hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
                 <CardHeader>
                   <CardTitle>{project.name}</CardTitle>
@@ -168,7 +175,7 @@ const HomePage = () => {
               </Card>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
         <div className="text-center mt-8">
             <Button variant="outline" asChild>
                 <a href="/projects">Tüm Projelerim</a>
@@ -177,10 +184,10 @@ const HomePage = () => {
       </motion.section>
 
       <motion.section
-        variants={sectionVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true, amount: 0.2 }}
         className="py-12 bg-muted rounded-lg p-8"
       >
         <h2 className="text-3xl font-semibold mb-6 text-center">İletişim</h2>

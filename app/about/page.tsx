@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge"; // Eksik olan import eklendi
 import { Briefcase, GraduationCap, Award, Star, Languages, Code, Brain, Rocket } from "lucide-react";
 
 const containerStagger = {

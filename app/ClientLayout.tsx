@@ -8,18 +8,28 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Github, Linkedin, Mail, Menu, X } from "lucide-react"
 import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from "@vercel/speed-insights/next" // <-- 1. BU SATIRI EKLE
-import "./globals.css" // app klasöründeki globals.css'i kullanmalı
-import { useState } from "react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
+import "./globals.css"
+import { useState, useEffect } from "react"
+import { AnimatePresence, motion } from "framer-motion"
+import { usePathname } from "next/navigation"
 
 const inter = Inter({ subsets: ["latin"] })
 
 function Header() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    // Header etiketine h-16 ve flex item-center eklendi
-    <header className="sticky top-0 z-40 w-full border-b border-blue-200 bg-white/80 backdrop-blur h-16 flex items-center">
-      {/* İç div'den h-16 kaldırıldı, w-full eklendi */}
-      <div className="container flex items-center justify-between w-full">
+    <header className={`sticky top-0 z-40 w-full border-b backdrop-blur transition-colors duration-300 ${scrolled ? 'bg-white/80 border-blue-200' : 'bg-transparent border-transparent'}`}>
+      <div className="container flex h-16 items-center justify-between w-full">
         <div className="font-bold text-xl text-blue-900">
           <Link href="/" className="flex items-center gap-2">
             <span>Nurullah Kurnaz</span>
@@ -39,11 +49,13 @@ function Header() {
             İletişim
           </Link>
         </nav>
-        <MobileNav />
-        <div className="hidden md:block">
-          <Button className="bg-blue-600 hover:bg-blue-700" asChild>
-            <Link href="/contact">İletişime Geç</Link>
-          </Button>
+        <div className="flex items-center gap-2">
+            <MobileNav />
+            <div className="hidden md:block">
+            <Button className="bg-blue-600 hover:bg-blue-700" asChild>
+                <Link href="/contact">İletişime Geç</Link>
+            </Button>
+            </div>
         </div>
       </div>
     </header>
@@ -59,8 +71,7 @@ function MobileNav() {
         {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
       </Button>
       {open && (
-        // Mobil menü, header'ın yüksekliği olan h-16 (top-16) kadar aşağıdan başlıyor.
-        <div className="fixed inset-0 top-16 z-50 bg-[#FFFFFF] p-4 flex flex-col gap-4">
+        <div className="fixed inset-0 top-16 z-50 bg-white p-4 flex flex-col gap-4">
           <Link
             href="/"
             className="text-lg font-medium hover:text-blue-600 transition-colors"
@@ -135,19 +146,31 @@ function Footer() {
 }
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+
   return (
     <html lang="tr" suppressHydrationWarning>
       <body className={`${inter.className} bg-blue-50`}>
         <ThemeProvider attribute="class" defaultTheme="light">
           <div className="flex min-h-screen flex-col">
             <Header />
-            {/* Ana içerik, header'ın yüksekliği (h-16) kadar yukarıdan boşluk bırakıyor (pt-16) */}
-            <main className="flex-1 pt-16">{children}</main>
+            <AnimatePresence mode="wait">
+              <motion.main
+                key={pathname}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+                className="flex-1" // pt-16 kaldırıldı, header'ın yüksekliği kadar boşluk bırakılmayacak.
+              >
+                {children}
+              </motion.main>
+            </AnimatePresence>
             <Footer />
           </div>
         </ThemeProvider>
         <Analytics />
-        <SpeedInsights /> {/* <-- 2. BU SATIRI EKLE (</body>'dan hemen önce, Analytics'in altına) */}
+        <SpeedInsights />
       </body>
     </html>
   )

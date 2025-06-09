@@ -118,7 +118,7 @@ export default function ContactPage() {
                       </a>
                     </Button>
                     <Button variant="outline" size="icon" asChild>
-                      <a href="https://linkedin.com/in/nurullah-kurnaz/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                      <a href="https://www.linkedin.com/in/nurullah-kurnaz-49393924a/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                         <Linkedin className="h-5 w-5" />
                       </a>
                     </Button>

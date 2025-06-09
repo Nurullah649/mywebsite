@@ -1,4 +1,3 @@
-// app/ClientLayout.tsx
 "use client"
 
 import type React from "react"
@@ -16,6 +15,13 @@ import { usePathname } from "next/navigation"
 
 const inter = Inter({ subsets: ["latin"] })
 
+const navItems = [
+    { name: 'Ana Sayfa', href: '/' },
+    { name: 'Hakkımda', href: '/about' },
+    { name: 'Projeler', href: '/projects' },
+    { name: 'İletişim', href: '/contact' },
+];
+
 function Header() {
   const [scrolled, setScrolled] = useState(false);
 
@@ -28,34 +34,45 @@ function Header() {
   }, []);
 
   return (
-    <header className={`sticky top-0 z-40 w-full border-b backdrop-blur transition-colors duration-300 ${scrolled ? 'bg-white/80 border-blue-200' : 'bg-transparent border-transparent'}`}>
+    <header className={`sticky top-0 z-50 w-full border-b backdrop-blur-lg transition-colors duration-300 ${scrolled ? 'bg-background/80 border-border' : 'bg-transparent border-transparent'}`}>
       <div className="container flex h-16 items-center justify-between w-full">
-        <div className="font-bold text-xl text-blue-900">
-          <Link href="/" className="flex items-center gap-2">
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
+          <Link href="/" className="flex items-center gap-2 font-bold text-xl text-foreground">
             <span>Nurullah Kurnaz</span>
           </Link>
-        </div>
-        <nav className="hidden md:flex gap-6">
-          <Link href="/" className="text-muted-foreground hover:text-blue-600 transition-colors">
-            Ana Sayfa
-          </Link>
-          <Link href="/about" className="text-muted-foreground hover:text-blue-600 transition-colors">
-            Hakkımda
-          </Link>
-          <Link href="/projects" className="text-muted-foreground hover:text-blue-600 transition-colors">
-            Projeler
-          </Link>
-          <Link href="/contact" className="text-muted-foreground hover:text-blue-600 transition-colors">
-            İletişim
-          </Link>
-        </nav>
+        </motion.div>
+        <motion.nav
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
+          className="hidden md:flex gap-1"
+        >
+          {navItems.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className="px-4 py-2 rounded-md text-muted-foreground hover:text-primary hover:bg-accent transition-colors"
+            >
+              {item.name}
+            </Link>
+          ))}
+        </motion.nav>
         <div className="flex items-center gap-2">
             <MobileNav />
-            <div className="hidden md:block">
-            <Button className="bg-blue-600 hover:bg-blue-700" asChild>
-                <Link href="/contact">İletişime Geç</Link>
-            </Button>
-            </div>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
+              className="hidden md:block"
+            >
+              <Button asChild>
+                  <Link href="/contact">İletişime Geç</Link>
+              </Button>
+            </motion.div>
         </div>
       </div>
     </header>
@@ -71,36 +88,18 @@ function MobileNav() {
         {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
       </Button>
       {open && (
-        <div className="fixed inset-0 top-16 z-50 bg-white p-4 flex flex-col gap-4">
-          <Link
-            href="/"
-            className="text-lg font-medium hover:text-blue-600 transition-colors"
-            onClick={() => setOpen(false)}
-          >
-            Ana Sayfa
-          </Link>
-          <Link
-            href="/about"
-            className="text-lg font-medium hover:text-blue-600 transition-colors"
-            onClick={() => setOpen(false)}
-          >
-            Hakkımda
-          </Link>
-          <Link
-            href="/projects"
-            className="text-lg font-medium hover:text-blue-600 transition-colors"
-            onClick={() => setOpen(false)}
-          >
-            Projeler
-          </Link>
-          <Link
-            href="/contact"
-            className="text-lg font-medium hover:text-blue-600 transition-colors"
-            onClick={() => setOpen(false)}
-          >
-            İletişim
-          </Link>
-          <Button className="bg-blue-600 hover:bg-blue-700 mt-4" asChild onClick={() => setOpen(false)}>
+        <div className="fixed inset-0 top-16 z-50 bg-background p-4 flex flex-col gap-4">
+          {navItems.map(item => (
+            <Link
+                key={item.href}
+                href={item.href}
+                className="text-lg font-medium hover:text-primary transition-colors"
+                onClick={() => setOpen(false)}
+            >
+                {item.name}
+            </Link>
+          ))}
+          <Button className="mt-4" asChild onClick={() => setOpen(false)}>
             <Link href="/contact">İletişime Geç</Link>
           </Button>
         </div>
@@ -111,33 +110,18 @@ function MobileNav() {
 
 function Footer() {
   return (
-    <footer className="border-t py-6 md:py-8 bg-blue-900 text-white">
-      <div className="container flex flex-col md:flex-row justify-between items-center">
-        <div className="text-center md:text-left mb-4 md:mb-0">
-          <p className="text-sm text-blue-200">© {new Date().getFullYear()} Nurullah Kurnaz. Tüm hakları saklıdır.</p>
-        </div>
+    <footer className="border-t bg-card py-6 md:py-8">
+      <div className="container flex flex-col md:flex-row justify-between items-center gap-4">
+        <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} Nurullah Kurnaz. Tüm hakları saklıdır.</p>
         <div className="flex gap-4">
-          <a
-            href="https://github.com/Nurullah649"
-            target="_blank"
-            className="text-blue-200 hover:text-white transition-colors"
-            rel="noreferrer"
-          >
+          <a href="https://github.com/Nurullah649" target="_blank" className="text-muted-foreground hover:text-primary transition-colors" rel="noreferrer" aria-label="GitHub">
             <Github className="h-5 w-5" />
-            <span className="sr-only">GitHub</span>
           </a>
-          <a
-            href="https://linkedin.com/in/nurullah-kurnaz/"
-            target="_blank"
-            className="text-blue-200 hover:text-white transition-colors"
-            rel="noreferrer"
-          >
+          <a href="https://linkedin.com/in/nurullah-kurnaz/" target="_blank" className="text-muted-foreground hover:text-primary transition-colors" rel="noreferrer" aria-label="LinkedIn">
             <Linkedin className="h-5 w-5" />
-            <span className="sr-only">LinkedIn</span>
           </a>
-          <a href="mailto:nurullahkurnaz47@gmail.com" className="text-blue-200 hover:text-white transition-colors">
+          <a href="mailto:nurullahkurnaz47@gmail.com" className="text-muted-foreground hover:text-primary transition-colors" aria-label="Email">
             <Mail className="h-5 w-5" />
-            <span className="sr-only">Email</span>
           </a>
         </div>
       </div>
@@ -150,8 +134,8 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
 
   return (
     <html lang="tr" suppressHydrationWarning>
-      <body className={`${inter.className} bg-blue-50`}>
-        <ThemeProvider attribute="class" defaultTheme="light">
+      <body className={`${inter.className} bg-background text-foreground`}>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <div className="flex min-h-screen flex-col">
             <Header />
             <AnimatePresence mode="wait">
@@ -160,7 +144,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.2, ease: "easeInOut" }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
                 className="flex-1"
               >
                 {children}

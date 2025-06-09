@@ -22,20 +22,40 @@ const DinoGame = () => {
     let isGameOver = false;
 
     // Event Listeners
-    const handleKeyDown = (e: KeyboardEvent) => { keys[e.code] = true; };
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Eğer basılan tuş Boşluk ise, tarayıcının varsayılan sayfa kaydırma işlemini engelle.
+      if (e.code === 'Space') {
+        e.preventDefault();
+      }
+      keys[e.code] = true;
+
+      // Oyun bittiyse ve boşluğa basıldıysa yeniden başlat
+      if (isGameOver && e.code === 'Space') {
+          restartGame();
+      }
+    };
+
     const handleKeyUp = (e: KeyboardEvent) => { keys[e.code] = false; };
-    const handleTouchStart = () => { if (dino.grounded) { dino.dy = dino.jumpForce; dino.grounded = false; } if(isGameOver) restartGame(); };
+    const handleTouchStart = () => {
+        if (dino.grounded && !isGameOver) {
+             dino.dy = dino.jumpForce;
+             dino.grounded = false;
+        }
+        if(isGameOver) {
+            restartGame();
+        }
+    };
 
     document.addEventListener('keydown', handleKeyDown);
     document.addEventListener('keyup', handleKeyUp);
     canvas.addEventListener('touchstart', handleTouchStart);
 
     function spawnObstacle() {
-      let size = Math.random() * (60 - 20) + 20;
+      let size = Math.random() * (50 - 20) + 20;
       let type = Math.random() > 0.5 ? 'cactus' : 'bird';
       let obstacle = {
         x: canvas.width + size,
-        y: type === 'cactus' ? canvas.height - size : canvas.height - size - 50,
+        y: type === 'cactus' ? canvas.height - size : canvas.height - size - 40,
         width: size,
         height: size
       };
@@ -47,7 +67,7 @@ const DinoGame = () => {
         obstacles = [];
         score = 0;
         gameSpeed = 5;
-        dino.y = canvas.height - 50;
+        dino.y = canvas.height - dino.height;
         dino.dy = 0;
         dino.grounded = true;
         loop();
@@ -95,8 +115,10 @@ const DinoGame = () => {
 
 
       // Obstacles
-      if (Math.random() < 0.015 && obstacles.length === 0) {
-        spawnObstacle();
+      if (obstacles.length === 0 || obstacles[obstacles.length - 1].x < canvas.width - 200 - Math.random() * 200) {
+        if(Math.random() < 0.02) {
+             spawnObstacle();
+        }
       }
 
       for (let i = obstacles.length - 1; i >= 0; i--) {
@@ -126,11 +148,12 @@ const DinoGame = () => {
 
       // Score
       score++;
-      gameSpeed += 0.003;
+      gameSpeed += 0.002;
       ctx.fillStyle = '#6B7280'; // gray-500
       ctx.font = '20px "Press Start 2P", sans-serif';
-      ctx.fillText('HI ' + Math.floor(highscore), canvas.width - 150, 30);
-      ctx.fillText(String(Math.floor(score)), canvas.width - 150, 60);
+      ctx.textAlign = 'right';
+      ctx.fillText('HI ' + Math.floor(highscore), canvas.width - 20, 30);
+      ctx.fillText(String(Math.floor(score)), canvas.width - 20, 60);
 
       // Draw ground
       ctx.strokeStyle = '#9CA3AF'; // gray-400
@@ -145,6 +168,7 @@ const DinoGame = () => {
     // Start game
     loop();
 
+    // Cleanup function
     return () => {
       cancelAnimationFrame(animationFrameId);
       document.removeEventListener('keydown', handleKeyDown);
@@ -154,6 +178,8 @@ const DinoGame = () => {
   }, []);
 
   useEffect(() => {
+    // Canvas ve context var mı kontrol et
+    if (!canvasRef.current) return;
     const cleanup = gameLoop();
     return cleanup;
   }, [gameLoop]);

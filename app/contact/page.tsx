@@ -85,7 +85,7 @@ export default function ContactPage() {
                 <div className="flex items-center gap-3"><MapPin className="text-primary" /><span>Selçuklu/Konya, Türkiye</span></div>
                 <div className="flex space-x-3 pt-4">
                   <Button variant="outline" size="icon" asChild><a href="https://github.com/Nurullah649" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><Github /></a></Button>
-                  <Button variant="outline" size="icon" asChild><a href="https://linkedin.com/in/nurullah-kurnaz/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Linkedin /></a></Button>
+                  <Button variant="outline" size="icon" asChild><a href="https://www.linkedin.com/in/nurullah-kurnaz-49393924a/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Linkedin /></a></Button>
                 </div>
               </CardContent>
             </Card>

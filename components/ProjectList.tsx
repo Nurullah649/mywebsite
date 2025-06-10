@@ -1,4 +1,5 @@
 // components/ProjectList.tsx
+'use client';
 
 // Animasyon bileşenini default import olarak değiştiriyoruz.
 import AnimationWrapper from "./AnimationWrapper";

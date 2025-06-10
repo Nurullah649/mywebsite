@@ -117,7 +117,7 @@ function Footer() {
           <a href="https://github.com/Nurullah649" target="_blank" className="text-muted-foreground hover:text-primary transition-colors" rel="noreferrer" aria-label="GitHub">
             <Github className="h-5 w-5" />
           </a>
-          <a href="https://linkedin.com/in/nurullah-kurnaz/" target="_blank" className="text-muted-foreground hover:text-primary transition-colors" rel="noreferrer" aria-label="LinkedIn">
+          <a href="https://www.linkedin.com/in/nurullah-kurnaz-49393924a/" target="_blank" className="text-muted-foreground hover:text-primary transition-colors" rel="noreferrer" aria-label="LinkedIn">
             <Linkedin className="h-5 w-5" />
           </a>
           <a href="mailto:nurullahkurnaz47@gmail.com" className="text-muted-foreground hover:text-primary transition-colors" aria-label="Email">

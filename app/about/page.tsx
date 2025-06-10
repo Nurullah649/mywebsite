@@ -45,7 +45,7 @@ const AboutPage = () => {
       company: "ICED",
       role: "Yapay Zeka Mühendisi",
       duration: "Kasım 2024 - Devam Ediyor",
-      description: "Hukuk alanında bir chatbot yapmak amacıyla LLM eğitimi ve optimizasyonları üstünde çalışmaktayım.",
+      description: "Hukuk alanında bir chatbot yapmak amacıyla LLM eğitimi ve optimizasyonları üstünde çalışmaktayım. Ayrıca büyük dil modellerini beslemek için RAG sistemleri üzerine çalışıyorum.",
     },
     {
       company: "Scove System",
@@ -100,7 +100,7 @@ const AboutPage = () => {
                     <h2 className="text-3xl font-semibold">Nurullah Kurnaz</h2>
                     <p className="text-lg text-primary">Bilgisayar Mühendisliği Öğrencisi & Yapay Zeka Geliştiricisi</p>
                     <p className="mt-4 text-muted-foreground leading-relaxed">
-                        Yapay zeka eğitimleri alıyor, Teknofest yarışması için görüntü işleme, nesne tespiti, nesne takibi ve robotik kodlama gibi alanlarda kendimi geliştiriyorum. Oyun ve mobil programlama konusunda temel deneyimlerim bulunmakta. Çalıştığım şirket aracılığıyla dil modelleri (GPT, LLaMA, Mistral vb.) üzerine çalışmalara katılıyorum. Amacım, teknolojiyle insanlığa faydalı çözümler üretmek ve bu alanda sürekli öğrenerek kendimi geliştirmektir.
+                        Yapay zeka eğitimleri alıyor, Teknofest yarışması için görüntü işleme, nesne tespiti, nesne takibi ve robotik kodlama gibi alanlarda kendimi geliştiriyorum. Oyun ve mobil programlama konusunda temel deneyimlerim bulunmakta. Çalıştığım şirket aracılığıyla dil modelleri (GPT, LLaMA, Mistral vb.) üzerine çalışmalar yapmaktayım ayrıca RAG sistemleri üzerine çalışmaktayım. Amacım, teknolojiyle insanlığa faydalı çözümler üretmek ve bu alanda sürekli öğrenerek kendimi geliştirmektir.
                     </p>
                 </div>
             </motion.section>

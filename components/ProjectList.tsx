@@ -1,8 +1,8 @@
 // components/ProjectList.tsx
 'use client';
 
-// Animasyon bileşenini default import olarak değiştiriyoruz.
-import AnimationWrapper from "./AnimationWrapper";
+// Gerekli animasyon modüllerini doğrudan bu dosyaya aktarıyoruz.
+import { motion, Variants } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -13,23 +13,33 @@ interface Project {
   imageUrl: string;
 }
 
+// Animasyon varyantlarını doğrudan bu bileşenin içinde tanımlıyoruz.
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+};
+
 export default function ProjectList({ projects }: { projects: Project[] }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {/* Proje listesini map ile dönerken her bir kartı AnimationWrapper ile sarıyoruz. */}
+      {/* Harici AnimationWrapper bileşeni yerine doğrudan motion.div kullanıyoruz. */}
       {projects.map((project, index) => (
-        // `delay` prop'u ile her bir kartın animasyonunu kademeli olarak başlatıyoruz.
-        <AnimationWrapper key={project.slug} delay={index * 0.1}>
+        <motion.div
+          key={project.slug}
+          variants={cardVariants}
+          initial="hidden"
+          animate="visible"
+          transition={{ duration: 0.5, delay: index * 0.1 }}
+          className="h-full" // motion.div'in de Link gibi tam yüksekliği kaplamasını sağlıyoruz.
+        >
           <Link href={`/projects/${project.slug}`} className="block h-full">
-            {/* Kartın tamamının tıklanabilir olması ve stil tutarlılığı için bazı iyileştirmeler yapıldı. */}
             <div className="border bg-card text-card-foreground rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 h-full flex flex-col">
-              {/* Görselin kapsayıcısına göre boyutlanması için relative bir parent ekliyoruz */}
               <div className="relative w-full h-48">
                 <Image
                   src={project.imageUrl}
                   alt={project.name}
-                  fill // `fill` prop'u görselin parent elementini doldurmasını sağlar.
-                  className="object-cover" // Görselin orantısını bozmadan alanı kaplamasını sağlar.
+                  fill
+                  className="object-cover"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </div>
@@ -38,7 +48,7 @@ export default function ProjectList({ projects }: { projects: Project[] }) {
               </div>
             </div>
           </Link>
-        </AnimationWrapper>
+        </motion.div>
       ))}
     </div>
   );

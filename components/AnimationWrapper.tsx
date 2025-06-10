@@ -13,8 +13,6 @@ interface AnimationWrapperProps {
 }
 
 // Framer Motion için animasyon varyantlarını tanımlıyoruz.
-// 'hidden': Bileşenin başlangıç durumu (görünmez ve biraz aşağıda)
-// 'visible': Bileşenin animasyon sonrası durumu (tamamen görünür ve orijinal pozisyonunda)
 const variants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0 },
@@ -24,7 +22,7 @@ const variants: Variants = {
  * Bu bileşen, içerisine aldığı çocuk elemanları (children)
  * basit bir "fade-in" ve "slide-up" efektiyle sarmalar.
  */
-export const AnimationWrapper = ({
+const AnimationWrapper = ({
   children,
   className,
   delay = 0,
@@ -41,3 +39,7 @@ export const AnimationWrapper = ({
     </motion.div>
   );
 };
+
+// Bileşeni varsayılan olarak dışa aktarıyoruz.
+export default AnimationWrapper;
+

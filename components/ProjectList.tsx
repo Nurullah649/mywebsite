@@ -1,7 +1,7 @@
 // components/ProjectList.tsx
 
-// Oluşturduğumuz animasyon bileşenini import ediyoruz.
-import { AnimationWrapper } from "./AnimationWrapper";
+// Animasyon bileşenini default import olarak değiştiriyoruz.
+import AnimationWrapper from "./AnimationWrapper";
 import Image from "next/image";
 import Link from "next/link";
 

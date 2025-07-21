@@ -35,8 +35,8 @@ const AboutPage = () => {
       institution: "KONYA TEKNİK ÜNİVERSİTESİ",
       degree: "Lisans",
       field: "BİLGİSAYAR MÜHENDİSLİĞİ",
-      years: "2022 - Devam Ediyor (3. Sınıf)",
-      gpa: "2.89",
+      years: "2022 - Devam Ediyor (4. Sınıf)",
+      gpa: "2.98",
     },
   ];
 

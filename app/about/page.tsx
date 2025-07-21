@@ -56,7 +56,7 @@ const AboutPage = () => {
   ];
 
   const skills = {
-    programming: ["Python", "C#", "C++", "Java", "JavaScript", "HTML", "CSS", "SQL"],
+    programming: ["Python", "C++", "Java", "SQL"],
     aiMl: ["PyTorch", "TensorFlow", "OpenCV", "Scikit-learn", "LLM"],
     tools: ["Git", "Linux"],
   };

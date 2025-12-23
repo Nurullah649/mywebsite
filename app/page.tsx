@@ -93,7 +93,7 @@ const HomePage = () => {
                <a href="https://github.com/Nurullah649" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-slate-100 dark:bg-slate-800 hover:text-teal-600 transition-colors">
                   <Github className="h-6 w-6" />
                </a>
-               <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-slate-100 dark:bg-slate-800 hover:text-blue-600 transition-colors">
+               <a href="https://www.linkedin.com/in/nurullah-kurnaz-49393924a/" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-slate-100 dark:bg-slate-800 hover:text-blue-600 transition-colors">
                   <Linkedin className="h-6 w-6" />
                </a>
                <a href="mailto:nurullahkurnaz47@gmail.com" className="p-2 rounded-full bg-slate-100 dark:bg-slate-800 hover:text-red-500 transition-colors">

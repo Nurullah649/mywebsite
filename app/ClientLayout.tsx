@@ -39,8 +39,8 @@ function Header() {
   }, []);
 
   return (
-    <header className={`sticky top-0 z-50 w-full border-b backdrop-blur-xl transition-all duration-500 ${scrolled ? 'bg-background/70 border-border/50 shadow-lg shadow-black/5' : 'bg-transparent border-transparent'}`}>
-      <div className="container flex h-16 items-center justify-between w-full">
+    <header className={`sticky top-0 z-50 w-full border-b transition-all duration-500 ${scrolled ? 'border-border/50 shadow-lg shadow-black/5' : 'border-transparent'}`} style={{ backgroundColor: "hsla(222, 47%, 5%, 0.92)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)" }}>
+      <div className="container flex h-14 md:h-16 items-center justify-between w-full">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -62,8 +62,8 @@ function Header() {
               key={item.href}
               href={item.href}
               className={`relative px-4 py-2 rounded-md text-sm font-medium transition-colors ${pathname === item.href
-                  ? "text-primary"
-                  : "text-muted-foreground hover:text-primary hover:bg-accent/50"
+                ? "text-primary"
+                : "text-muted-foreground hover:text-primary hover:bg-accent/50"
                 }`}
             >
               {item.name}
@@ -77,7 +77,7 @@ function Header() {
             </Link>
           ))}
         </motion.nav>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 md:gap-2">
           <LanguageToggle />
           <MobileNav />
           <motion.div
@@ -99,6 +99,11 @@ function Header() {
 function MobileNav() {
   const [open, setOpen] = useState(false)
   const { t } = useLanguage();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const navItems = [
     { name: t("nav", "home"), href: '/' },
@@ -107,48 +112,65 @@ function MobileNav() {
     { name: t("nav", "contact"), href: '/contact' },
   ];
 
+  const overlay = (
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.25 }}
+          style={{
+            position: "fixed",
+            inset: 0,
+            top: 56,
+            zIndex: 9999,
+            backgroundColor: "#020817",
+            padding: "1.5rem",
+            display: "flex",
+            flexDirection: "column",
+            gap: "1rem",
+            overflowY: "auto",
+          }}
+        >
+          {navItems.map((item, index) => (
+            <motion.div
+              key={item.href}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: index * 0.1, duration: 0.3 }}
+            >
+              <Link
+                href={item.href}
+                className="text-lg font-medium text-foreground hover:text-primary transition-colors block py-3 border-b border-border/20"
+                onClick={() => setOpen(false)}
+              >
+                {item.name}
+              </Link>
+            </motion.div>
+          ))}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.3 }}
+          >
+            <Button className="mt-4 w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white" asChild onClick={() => setOpen(false)}>
+              <Link href="/contact">{t("nav", "cta")}</Link>
+            </Button>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+
   return (
     <div className="md:hidden">
       <Button variant="ghost" size="icon" onClick={() => setOpen(!open)}>
         {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
       </Button>
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed inset-0 top-16 z-50 bg-background/95 backdrop-blur-xl p-6 flex flex-col gap-4"
-          >
-            {navItems.map((item, index) => (
-              <motion.div
-                key={item.href}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.3 }}
-              >
-                <Link
-                  href={item.href}
-                  className="text-lg font-medium hover:text-primary transition-colors block py-2"
-                  onClick={() => setOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              </motion.div>
-            ))}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.3 }}
-            >
-              <Button className="mt-4 w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white" asChild onClick={() => setOpen(false)}>
-                <Link href="/contact">{t("nav", "cta")}</Link>
-              </Button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {mounted && typeof document !== "undefined"
+        ? require("react-dom").createPortal(overlay, document.body)
+        : null}
     </div>
   )
 }

@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    /* Yeni Canlı Renk Paleti (Açık Mod) */
+    /* Açık Mod */
     --background: 210 20% 98%;
     --foreground: 224 71% 10%;
 
@@ -14,16 +14,16 @@
     --popover: 210 20% 100%;
     --popover-foreground: 224 71% 10%;
 
-    --primary: 173 80% 36%; /* Teal */
+    --primary: 173 80% 36%;
     --primary-foreground: 355 100% 97%;
 
-    --secondary: 270 90% 96%; /* Açık Fuchsia */
+    --secondary: 270 90% 96%;
     --secondary-foreground: 270 90% 25%;
 
     --muted: 220 14% 96%;
     --muted-foreground: 220 9% 46%;
 
-    --accent: 270 90% 97%; /* Vurgu için daha açık fuchsia */
+    --accent: 270 90% 97%;
     --accent-foreground: 270 90% 30%;
 
     --destructive: 0 84% 60%;
@@ -37,34 +37,34 @@
   }
 
   .dark {
-     /* Yeni Canlı Renk Paleti (Koyu Mod) */
-    --background: 224 71% 4%;
-    --foreground: 210 20% 98%;
+    /* Koyu Mod — Neural/Neon teması */
+    --background: 222 47% 5%;
+    --foreground: 210 20% 95%;
 
-    --card: 224 71% 8%;
-    --card-foreground: 210 20% 98%;
+    --card: 222 47% 8%;
+    --card-foreground: 210 20% 95%;
 
-    --popover: 224 71% 4%;
-    --popover-foreground: 210 20% 98%;
+    --popover: 222 47% 6%;
+    --popover-foreground: 210 20% 95%;
 
-    --primary: 173 70% 45%; /* Daha parlak Teal */
-    --primary-foreground: 224 71% 4%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 222 47% 4%;
 
-    --secondary: 270 90% 15%; /* Koyu Fuchsia */
-    --secondary-foreground: 270 90% 90%;
+    --secondary: 270 50% 15%;
+    --secondary-foreground: 270 50% 90%;
 
     --muted: 220 14% 15%;
     --muted-foreground: 220 9% 54%;
 
-    --accent: 270 90% 20%;
-    --accent-foreground: 270 90% 90%;
+    --accent: 270 50% 20%;
+    --accent-foreground: 270 50% 90%;
 
     --destructive: 0 62% 30%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 220 13% 18%;
     --input: 220 13% 18%;
-    --ring: 173 70% 45%;
+    --ring: 217 91% 60%;
   }
 }
 
@@ -77,25 +77,27 @@
   }
 }
 
-/* Custom animations */
+/* ===== CUSTOM ANIMATIONS ===== */
+
+/* Float */
 @keyframes float {
   0% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
   100% { transform: translateY(0px); }
 }
-
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
 
+/* Animated gradient text */
 .animated-gradient-text {
   @apply bg-clip-text text-transparent;
   background-image: linear-gradient(
     -225deg,
-    #0d9488 0%, /* Teal */
-    #a21caf 29%, /* Fuchsia */
-    #4f46e5 67%, /* Indigo */
-    #14b8a6 100% /* Lighter Teal */
+    #3b82f6 0%,
+    #a855f7 29%,
+    #ec4899 67%,
+    #3b82f6 100%
   );
   background-size: 200% auto;
   animation: textclip 5s linear infinite;
@@ -107,7 +109,71 @@
   }
 }
 
+/* Background pan */
+@keyframes background-pan {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Glow pulse */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3), 0 0 40px rgba(59, 130, 246, 0.1); }
+  50% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.5), 0 0 60px rgba(59, 130, 246, 0.2); }
+}
+.animate-glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+/* Marquee */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hero background */
 .hero-bg {
-    background: radial-gradient(circle at top left, hsla(173, 80%, 36%, 0.1), transparent 40%),
-                radial-gradient(circle at bottom right, hsla(270, 90%, 60%, 0.1), transparent 40%);
+  background: radial-gradient(circle at top left, hsla(217, 91%, 60%, 0.1), transparent 40%),
+              radial-gradient(circle at bottom right, hsla(270, 50%, 60%, 0.1), transparent 40%);
+}
+
+/* Neural background canvas */
+.neural-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Glassmorphism utility */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Custom scrollbar for dark mode */
+.dark ::-webkit-scrollbar {
+  width: 8px;
+}
+.dark ::-webkit-scrollbar-track {
+  background: hsl(222, 47%, 5%);
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: hsl(220, 13%, 25%);
+  border-radius: 4px;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: hsl(220, 13%, 35%);
 }

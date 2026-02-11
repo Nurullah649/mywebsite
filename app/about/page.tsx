@@ -1,188 +1,223 @@
-import { Metadata } from "next";
+"use client";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
-import { Briefcase, GraduationCap, Code2, Cpu, Terminal } from "lucide-react";
-
-export const metadata: Metadata = {
-  title: "Hakkımda | Nurullah Kurnaz",
-  description: "Yapay zeka mühendisi ve geliştirici Nurullah Kurnaz hakkında bilgiler, deneyimler ve eğitim geçmişi.",
-};
+import { Briefcase, GraduationCap, Code2, Cpu, Terminal, Globe2 } from "lucide-react";
+import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { translations } from "@/lib/i18n/translations";
 
 export default function AboutPage() {
+  const { t, lang } = useLanguage();
+  const aboutData = translations.about;
+
   return (
-    <div className="container mx-auto p-4 md:p-8 space-y-12 max-w-4xl">
-      {/* --- GİRİŞ / BİYOGRAFİ KISMI --- */}
-      <section className="space-y-4">
-        <h1 className="text-4xl font-bold tracking-tight">Hakkımda</h1>
-        <p className="text-lg text-muted-foreground leading-relaxed">
-          Merhaba, ben <strong>Nurullah Kurnaz</strong>. Konya Teknik Üniversitesi Bilgisayar Mühendisliği öğrencisiyim. 
-          Özellikle <strong>Yapay Zeka</strong>, <strong>Otonom Sistemler</strong> ve <strong>Full-Stack Geliştirme</strong> alanlarında tutkulu bir mühendisim. 
-          Karmaşık problemleri çözmek için derin öğrenme modelleri (LLM, RAG) ve modern web teknolojilerini bir araya getirmeyi seviyorum.
+    <div className="container mx-auto p-4 md:p-8 space-y-16 max-w-4xl pb-20">
+      {/* --- GİRİŞ --- */}
+      <motion.section
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="space-y-4 text-center"
+      >
+        <h1 className="text-4xl md:text-5xl font-bold tracking-tight bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+          {t("about", "title")}
+        </h1>
+        <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
+          {t("about", "bio")}
         </p>
-      </section>
+      </motion.section>
 
-      <Separator />
+      {/* --- İŞ DENEYİMİ (Timeline) --- */}
+      <section className="space-y-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex items-center gap-3"
+        >
+          <div className="p-2 bg-blue-500/20 rounded-full">
+            <Briefcase className="h-6 w-6 text-blue-400" />
+          </div>
+          <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            {t("about", "experienceTitle")}
+          </h2>
+        </motion.div>
 
-      {/* --- İŞ DENEYİMİ --- */}
-      <section className="space-y-6">
-        <div className="flex items-center gap-2">
-          <Briefcase className="h-6 w-6 text-primary" />
-          <h2 className="text-2xl font-semibold">İş Deneyimi & Araştırma</h2>
-        </div>
+        <div className="relative">
+          {/* Timeline line */}
+          <div className="absolute left-[19px] top-4 bottom-4 w-0.5 bg-gradient-to-b from-blue-400 via-purple-400 to-pink-400 rounded-full" />
 
-        <div className="grid gap-6">
-          {/* ICED */}
-          <Card>
-            <CardHeader>
-              <div className="flex justify-between items-start flex-col md:flex-row gap-2">
-                <div>
-                  <CardTitle className="text-xl">Yapay Zeka Mühendisi</CardTitle>
-                  <p className="text-muted-foreground font-medium">ICED</p>
-                </div>
-                <Badge variant="secondary">Kasım 2024 - Kasım 2025</Badge>
-              </div>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <p className="text-sm text-muted-foreground">
-                Hukuk alanına özel, doğru içtihat bilgileri sunan RAG (Retrieval-Augmented Generation) mimarili bir chatbot projesine liderlik ettim.
-              </p>
-              <ul className="list-disc list-inside text-sm space-y-1 ml-1">
-                <li>Llama 3 ve Mistral modelleri üzerinde fine-tuning yaparak Türkçe hukuk metinlerinde başarıyı artırdım.</li>
-                <li>Vektör veritabanı çözümleri ile anlamsal arama performansını iyileştirdim ve halüsinasyon oranlarını düşürdüm.</li>
-                <li>Yapay zeka modellerini ürünün çekirdek yapısına entegre etmek için ölçeklenebilir API uç noktaları geliştirdim.</li>
-              </ul>
-            </CardContent>
-          </Card>
+          <div className="space-y-8">
+            {aboutData.experiences.map((exp, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.15 }}
+                viewport={{ once: true }}
+                className="relative pl-12"
+              >
+                {/* Timeline node */}
+                <motion.div
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  transition={{ delay: index * 0.15 + 0.3, duration: 0.4 }}
+                  viewport={{ once: true }}
+                  className="absolute left-2.5 top-6 w-3.5 h-3.5 bg-blue-400 rounded-full border-4 border-background z-10"
+                />
 
-          {/* TÜBİTAK */}
-          <Card>
-            <CardHeader>
-              <div className="flex justify-between items-start flex-col md:flex-row gap-2">
-                <div>
-                  <CardTitle className="text-xl">Proje Yürütücüsü / Araştırmacı (TÜBİTAK 2209-A)</CardTitle>
-                  <p className="text-muted-foreground font-medium">Konya Teknik Üniversitesi</p>
-                </div>
-                <Badge variant="secondary">Temmuz 2025 - Devam Ediyor</Badge>
-              </div>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <p className="text-sm text-muted-foreground">
-                "Fizik-Bilgilendirilmiş Transformer VIO" projesi.
-              </p>
-              <ul className="list-disc list-inside text-sm space-y-1 ml-1">
-                <li>GNSS (GPS) olmayan ortamlarda kümülatif sapma hatasını minimize eden özgün bir Derin Öğrenme yaklaşımı geliştirdim.</li>
-                <li>PyTorch ile Transformer tabanlı bir Encoder-Decoder modeli tasarladım ve EuRoC testlerinde 0.025m hata oranı ile klasik ORB-SLAM3'ü geride bıraktım.</li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          {/* Scove Systems */}
-          <Card>
-            <CardHeader>
-              <div className="flex justify-between items-start flex-col md:flex-row gap-2">
-                <div>
-                  <CardTitle className="text-xl">Yazılım Mühendisi Stajyeri</CardTitle>
-                  <p className="text-muted-foreground font-medium">Scove Systems</p>
-                </div>
-                <Badge variant="secondary">Temmuz 2024 - Ağustos 2024</Badge>
-              </div>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <p className="text-sm text-muted-foreground">
-                Hayvan davranışlarının otomatik analizi için görüntü işleme çözümleri.
-              </p>
-              <ul className="list-disc list-inside text-sm space-y-1 ml-1">
-                <li>Python ve DeepLabCut kullanarak işaretsiz poz tahmini (markerless pose estimation) uygulaması geliştirdim.</li>
-                <li>Video işleme süreçlerini multi-threading ile optimize ederek analiz süresini kısalttım.</li>
-                <li>Linux tabanlı analiz sunucularının kurulumunu ve ağ yönetimini gerçekleştirdim.</li>
-              </ul>
-            </CardContent>
-          </Card>
+                <Card className="bg-card/50 backdrop-blur-sm border-border/50 hover:border-blue-400/30 transition-all duration-300">
+                  <CardHeader>
+                    <div className="flex justify-between items-start flex-col md:flex-row gap-2">
+                      <div>
+                        <CardTitle className="text-xl text-foreground">{exp.title[lang]}</CardTitle>
+                        <p className="text-blue-400 font-medium">{typeof exp.company === 'string' ? exp.company : exp.company[lang]}</p>
+                      </div>
+                      <Badge variant="outline" className="border-purple-400/30 text-purple-300 shrink-0">
+                        {exp.period[lang]}
+                      </Badge>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <p className="text-sm text-muted-foreground">{exp.description[lang]}</p>
+                    <ul className="list-disc list-inside text-sm space-y-1.5 ml-1 text-muted-foreground">
+                      {exp.bullets[lang].map((bullet, i) => (
+                        <li key={i}>{bullet}</li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
-
-      <Separator />
 
       {/* --- EĞİTİM --- */}
-      <section className="space-y-6">
-        <div className="flex items-center gap-2">
-          <GraduationCap className="h-6 w-6 text-primary" />
-          <h2 className="text-2xl font-semibold">Eğitim</h2>
+      <motion.section
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="space-y-6"
+      >
+        <div className="flex items-center gap-3">
+          <div className="p-2 bg-green-500/20 rounded-full">
+            <GraduationCap className="h-6 w-6 text-green-400" />
+          </div>
+          <h2 className="text-2xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
+            {t("about", "educationTitle")}
+          </h2>
         </div>
-        <Card>
+        <Card className="bg-card/50 backdrop-blur-sm border-border/50 hover:border-green-400/30 transition-all duration-300">
           <CardHeader>
-             <div className="flex justify-between items-start">
-                <div>
-                  <CardTitle className="text-xl">Bilgisayar Mühendisliği Lisans</CardTitle>
-                  <p className="text-muted-foreground">Konya Teknik Üniversitesi</p>
-                </div>
-                <div className="text-right">
-                    <Badge variant="outline">Eylül 2022 - Devam Ediyor</Badge>
-                    <p className="text-sm text-muted-foreground mt-1">GPA: 2.98/4.00</p>
-                </div>
+            <div className="flex justify-between items-start flex-col md:flex-row gap-2">
+              <div>
+                <CardTitle className="text-xl">{aboutData.education.degree[lang]}</CardTitle>
+                <p className="text-green-400 font-medium">{aboutData.education.school[lang]}</p>
               </div>
+              <div className="text-right">
+                <Badge variant="outline" className="border-green-400/30 text-green-300">{aboutData.education.period[lang]}</Badge>
+                <p className="text-sm text-muted-foreground mt-1">GPA: {aboutData.education.gpa}</p>
+              </div>
+            </div>
           </CardHeader>
           <CardContent>
             <p className="text-sm text-muted-foreground">
-              <strong>İlgili Dersler:</strong> İleri Algoritmalar, Yapay Zeka, Sayısal Görüntü İşleme, Gömülü Sistem Mimarisi, Veritabanı Yönetim Sistemleri, OOP.
+              <strong>{lang === "tr" ? "İlgili Dersler:" : "Related Courses:"}</strong> {aboutData.education.courses[lang]}
             </p>
           </CardContent>
         </Card>
-      </section>
-
-      <Separator />
+      </motion.section>
 
       {/* --- TEKNİK YETENEKLER --- */}
-      <section className="space-y-6">
-        <div className="flex items-center gap-2">
-          <Code2 className="h-6 w-6 text-primary" />
-          <h2 className="text-2xl font-semibold">Teknik Yetenekler</h2>
+      <motion.section
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="space-y-6"
+      >
+        <div className="flex items-center gap-3">
+          <div className="p-2 bg-purple-500/20 rounded-full">
+            <Code2 className="h-6 w-6 text-purple-400" />
+          </div>
+          <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            {t("about", "skillsTitle")}
+          </h2>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2">
-            
-            {/* AI & ML */}
-            <div className="space-y-3">
+          {Object.entries(aboutData.skillCategories).map(([key, category], catIndex) => {
+            const icons: Record<string, React.ReactNode> = {
+              aiMl: <Cpu className="h-5 w-5 text-blue-400" />,
+              dev: <Terminal className="h-5 w-5 text-green-400" />,
+              robotics: <Cpu className="h-5 w-5 text-purple-400" />,
+              languages: <Code2 className="h-5 w-5 text-pink-400" />,
+            };
+
+            return (
+              <motion.div
+                key={key}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: catIndex * 0.1 }}
+                viewport={{ once: true }}
+                className={`space-y-3 ${key === "robotics" ? "md:col-span-2" : ""}`}
+              >
                 <div className="flex items-center gap-2 mb-2">
-                    <Cpu className="h-5 w-5 text-muted-foreground" />
-                    <h3 className="font-medium">Yapay Zeka & ML</h3>
+                  {icons[key]}
+                  <h3 className="font-medium text-foreground">{category.title[lang]}</h3>
                 </div>
                 <div className="flex flex-wrap gap-2">
-                    {["Python", "PyTorch", "TensorFlow", "YOLO", "LLMs (Llama, Mistral, Qwen)", "RAG", "DeepLabCut", "OpenCV", "Hugging Face"].map((skill) => (
-                        <Badge key={skill} variant="secondary">{skill}</Badge>
-                    ))}
+                  {category.skills.map((skill) => (
+                    <motion.div key={skill} whileHover={{ scale: 1.05 }}>
+                      <Badge variant="secondary" className="bg-card/80 border border-border/50 hover:border-purple-400/30 transition-colors cursor-default">
+                        {skill}
+                      </Badge>
+                    </motion.div>
+                  ))}
                 </div>
-            </div>
-
-            {/* Development */}
-             <div className="space-y-3">
-                <div className="flex items-center gap-2 mb-2">
-                    <Terminal className="h-5 w-5 text-muted-foreground" />
-                    <h3 className="font-medium">Geliştirme & Araçlar</h3>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                    {["React", "React Native", "Electron", "Next.js", "Node.js", "Flask", "FastAPI", "Docker", "Git", "Linux", "SQL", "C++"].map((skill) => (
-                        <Badge key={skill} variant="secondary">{skill}</Badge>
-                    ))}
-                </div>
-            </div>
-
-             {/* Robotics */}
-             <div className="space-y-3 md:col-span-2">
-                <div className="flex items-center gap-2 mb-2">
-                    <Cpu className="h-5 w-5 text-muted-foreground" />
-                    <h3 className="font-medium">Robotik & IoT</h3>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                    {["ROS / ROS2", "SLAM", "VIO", "Sensor Fusion", "Raspberry Pi", "Jetson Orin Nano", "Arduino", "Gömülü Sistemler"].map((skill) => (
-                        <Badge key={skill} variant="secondary">{skill}</Badge>
-                    ))}
-                </div>
-            </div>
-
+              </motion.div>
+            );
+          })}
         </div>
-      </section>
+      </motion.section>
+
+      {/* --- DİLLER --- */}
+      <motion.section
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="space-y-6"
+      >
+        <div className="flex items-center gap-3">
+          <div className="p-2 bg-cyan-500/20 rounded-full">
+            <Globe2 className="h-6 w-6 text-cyan-400" />
+          </div>
+          <h2 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+            {t("about", "languagesTitle")}
+          </h2>
+        </div>
+
+        <div className="flex gap-4">
+          {aboutData.languages.map((language, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: index * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <Card className="bg-card/50 backdrop-blur-sm border-border/50 hover:border-cyan-400/30 transition-all duration-300">
+                <CardContent className="p-4 text-center">
+                  <p className="font-medium text-foreground">{language.name[lang]}</p>
+                  <p className="text-sm text-cyan-400">{language.level[lang]}</p>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      </motion.section>
     </div>
   );
 }
